@@ -18,6 +18,7 @@
                 </div>
             </div>
 
+            @auth
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
@@ -61,6 +62,17 @@
                     </svg>
                 </button>
             </div>
+            @else
+            <!-- Guest Links -->
+            <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                    {{ __('Log in') }}
+                </x-nav-link>
+                <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                    {{ __('Register') }}
+                </x-nav-link>
+            </div>
+            @endauth
         </div>
     </div>
 
@@ -72,6 +84,7 @@
             </x-responsive-nav-link>
         </div>
 
+        @auth
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
@@ -96,5 +109,16 @@
                 </form>
             </div>
         </div>
+        @else
+        <!-- Responsive Guest Links -->
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                {{ __('Log in') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                {{ __('Register') }}
+            </x-responsive-nav-link>
+        </div>
+        @endauth
     </div>
 </nav>
